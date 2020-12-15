@@ -1,0 +1,5 @@
+<%= form_tag "/applications/#{@application.id}/", method: :patch do %>
+<%= label_tag "Why would you be a good home for the pet(s) that you selected?" %>
+<%= text_field_tag :description %>
+<%= submit_tag "Submit" %>
+<% end %>

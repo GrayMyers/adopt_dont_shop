@@ -1,0 +1,26 @@
+
+<h1><%= @application.applicant %>'s Application</h1>
+<% if @application.submitted? %>
+<h2>Status:<%= @application.status %></h2>
+<% end %>
+
+<h3>Address:</h3>
+<p><%= @application.address %></p>
+
+<h3>Description:</h3>
+<p><%= @application.description %></p>
+
+<h3>Pets:</h3>
+<ul>
+<% @application.pets.each do |pet| %>
+  <li><%= pet.name %></li>
+<% end %>
+<% if !@application.submitted? %>
+  <%= button_to "Add Pet", "/applications/#{@application.id}/pets", method: :get %>
+<% end %>
+
+<% if @application.has_pets? && !@application.submitted? %>
+  <%= button_to "Submit", "/applications/#{@application.id}/edit", method: :get %>
+<% end %>
+
+</ul>
