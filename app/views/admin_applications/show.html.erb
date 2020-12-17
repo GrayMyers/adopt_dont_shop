@@ -1,0 +1,27 @@
+<h1><%= @application.applicant %>'s Application</h1>
+
+<h2>Status: <%= @application.check_status %></h2>
+
+
+<h3>Address:</h3>
+<p><%= @application.address %></p>
+
+<h3>Description:</h3>
+<p><%= @application.description %></p>
+
+<h3>Pets:</h3>
+<ul>
+<% @application.pets.each do |pet| %>
+  <li><%= pet.name %>
+    <% if pet.application_result(@application.id) %>
+      <%= pet.application_result(@application.id) %>
+    <% elsif pet.adoptable %>
+      <%= button_to "Approve", "/admin/applications/#{@application.id}?pet=#{pet.id}&decision=Approved", method: :post %>
+      <%= button_to "Reject", "/admin/applications/#{@application.id}?pet=#{pet.id}&decision=Rejected", method: :post %>
+    <% else %>
+      <%= button_to "Adopted", "", method: :post, disabled: true %>
+      <%= button_to "Reject", "/admin/applications/#{@application.id}?pet=#{pet.id}&decision=Rejected", method: :post %>
+    <% end %></li>
+<% end %>
+
+</ul>

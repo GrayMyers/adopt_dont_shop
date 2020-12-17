@@ -75,3 +75,8 @@ header {
   width: 50%;
   height: auto;
 }
+
+.flash {
+  color: red;
+  font-size: 18px;
+}

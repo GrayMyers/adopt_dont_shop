@@ -3,10 +3,21 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
+  def new
+
+  end
+
+  def create
+    application = Application.new(
+      app_params
+    )
+    application.save
+
+    redirect_to "/applications/#{application.id}"
+  end
+
   def submit
     application = Application.find(params[:id])
-    application.status = "Pending"
-    application.save
     redirect_to "/applications/#{application.id}"
   end
 
@@ -15,9 +26,22 @@ class ApplicationsController < ApplicationController
   end
 
   def update
-    application = Application.find(params[:id])
-    application.description = params[:description]
-    application.save
-    redirect_to "/applications/#{application.id}"
+    @application = Application.find(params[:id])
+    if @application.update(description: params[:description])
+      @application.submitted = true
+      @application.save
+      redirect_to "/applications/#{@application.id}"
+    else
+      flash.now[:error] = @application.errors.full_messages
+      render :edit
+    end
   end
+
+  private
+
+  def app_params
+    params.permit(:applicant, :address, :city, :state, :zip)
+  end
+
+
 end

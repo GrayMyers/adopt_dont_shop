@@ -17,6 +17,11 @@
   </head><br>
 
   <body>
+    <% if flash[:error]%>
+      <% flash[:error].each do |message| %>
+        <p class = "flash" ><%= message %></p>
+      <% end %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

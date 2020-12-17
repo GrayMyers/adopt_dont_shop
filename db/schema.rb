@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_15_022657) do
+ActiveRecord::Schema.define(version: 2020_12_15_190835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_12_15_022657) do
     t.bigint "applications_id"
     t.bigint "application_id"
     t.bigint "pet_id"
-    t.string "status"
+    t.string "status" #enum
     t.index ["application_id"], name: "index_application_pets_on_application_id"
     t.index ["applications_id"], name: "index_application_pets_on_applications_id"
     t.index ["pet_id"], name: "index_application_pets_on_pet_id"
@@ -31,9 +31,12 @@ ActiveRecord::Schema.define(version: 2020_12_15_022657) do
     t.string "address"
     t.string "applicant"
     t.string "description"
-    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "submitted", default: false
+    t.string "city"
+    t.string "state"
+    t.string "zip"
   end
 
   create_table "pets", force: :cascade do |t|

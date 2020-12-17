@@ -1,0 +1,13 @@
+<%= form_tag "/applications/", method: :post do %>
+<%= label_tag "Name" %>
+<%= text_field_tag :applicant %><br>
+<%= label_tag "Street Address" %>
+<%= text_field_tag :address %><br>
+<%= label_tag "City" %>
+<%= text_field_tag :city %><br>
+<%= label_tag "State" %>
+<%= text_field_tag :state %><br>
+<%= label_tag "Zip Code" %>
+<%= text_field_tag :zip %><br>
+<%= submit_tag "Submit" %>
+<% end %>

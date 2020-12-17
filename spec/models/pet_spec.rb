@@ -41,4 +41,25 @@ describe Pet, type: :model do
       expect(pet.male?).to be(false)
     end
   end
+
+  describe "instance methods" do
+    before :each do
+      @shelter1 = Shelter.create!(name: "Shady Shelter", address: "123 Shady Ave", city: "Denver", state: "CO", zip: 80011)
+
+      @pet1 = @shelter1.pets.create!(image:"", name: "Thor", description: "dog", approximate_age: 2, sex: "male")
+      @pet2 = @shelter1.pets.create!(image:"", name: "Athena", description: "cat", approximate_age: 3, sex: "female")
+      @pet3 = @shelter1.pets.create!(image:"", name: "Zeus", description: "dog", approximate_age: 4, sex: "male")
+
+      @application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80129")
+      @application2 = Application.create(applicant: "Jane Doe", description: "I love dogs more than John", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80129")
+
+      @pet_1_app_1 = ApplicationPet.create(application: @application1, pet: @pet1)
+      @pet_1_app_1.status = "Approved"
+      @pet_1_app_1.save
+    end
+
+    it "application_result" do
+      expect(@pet1.application_result(@application1.id)).to eq(@pet_1_app_1.status)
+    end
+  end
 end
