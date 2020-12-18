@@ -16,10 +16,7 @@ class ApplicationsController < ApplicationController
     redirect_to "/applications/#{application.id}"
   end
 
-  def submit
-    application = Application.find(params[:id])
-    redirect_to "/applications/#{application.id}"
-  end
+  #
 
   def edit
     @application = Application.find(params[:id])

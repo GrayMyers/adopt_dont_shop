@@ -1,0 +1,14 @@
+<h1><%= @shelter.name %></h1>
+<p>Address: <%= @shelter.formatted_address %></p>
+
+<h2>Action Required</h2>
+<ul>
+<% @shelter.pending_pets.each do |pet| %>
+  <li><%= pet.name %><%= link_to "view application", "/admin/applications/#{pet.pending_apps.first.application.id}" %></li>
+<% end %>
+</ul>
+
+<h2>Statistics</h2>
+<p>Average Pet Age: <%= @shelter.avg_age.to_i %></p>
+<p>Adoptable Pets: <%= @shelter.num_adoptable %></p>
+<p>Adopted Pets: <%= @shelter.num_adopted %></p>

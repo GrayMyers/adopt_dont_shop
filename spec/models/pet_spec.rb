@@ -52,6 +52,8 @@ describe Pet, type: :model do
 
       @application1 = Application.create(applicant: "John Doe", description: "I love dogs!!!", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80129")
       @application2 = Application.create(applicant: "Jane Doe", description: "I love dogs more than John", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80129")
+      @application3 = Application.create(applicant: "Jane Doe", description: "I love dogs more than John", address: "123 Street", city: "Denver", state: 'Colorado', zip: "80129")
+
 
       @pet_1_app_1 = ApplicationPet.create(application: @application1, pet: @pet1)
       @pet_1_app_1.status = "Approved"
@@ -60,6 +62,12 @@ describe Pet, type: :model do
 
     it "application_result" do
       expect(@pet1.application_result(@application1.id)).to eq(@pet_1_app_1.status)
+    end
+
+    it "pending_apps" do
+      pet_1_app_2 = ApplicationPet.create(application: @application2, pet: @pet1)
+      pet_1_app_3 = ApplicationPet.create(application: @application3, pet: @pet1)
+      expect(@pet1.pending_apps).to eq([pet_1_app_2,pet_1_app_3])
     end
   end
 end

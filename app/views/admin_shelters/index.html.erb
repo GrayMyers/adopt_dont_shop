@@ -1,0 +1,13 @@
+<h1>Shelters</h1>
+<h3>Shelters With Pending Applications</h3>
+<ul>
+<% @pending_shelters.each do |shelter| %>
+  <li class = <%= "pending-shelter-#{shelter.id}" %>><%= link_to shelter.name, "/admin/shelters/#{shelter.id}" %></li>
+<% end %>
+</ul>
+<h3 class = "all-shelter-header">All Shelters</h3>
+<ul>
+<% @shelters.each do |shelter| %>
+  <li class = <%= "shelter-#{shelter.id}" %>><%= link_to shelter.name, "/admin/shelters/#{shelter.id}" %></li>
+<% end %>
+</ul>
